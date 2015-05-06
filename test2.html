@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+
+    <h2><a id="applink1" href="#">open facebook with fallback to appstore</a></h2>
+    <h2><a id="applink2" href="#">open unknown with fallback to appstore</a></h2>
+    <p><i>Only works on iPhone!</i></p>    
+
+  <script type="text/javascript">
+
+var redirect = function (location) {
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('src', location);
+    iframe.setAttribute('width', '1px');
+    iframe.setAttribute('height', '1px');
+    iframe.setAttribute('position', 'absolute');
+    iframe.setAttribute('top', '0');
+    iframe.setAttribute('left', '0');
+    document.documentElement.appendChild(iframe);
+    iframe.parentNode.removeChild(iframe);
+    iframe = null;
+};
+
+
+
+function applinkSuccess(){
+   setTimeout(function () {
+    redirect('itms://itunes.apple.com/us/app/facebook/id284882215?mt=8&uo=6');
+   }, 100);
+   redirect("fb://profile/caa1211");
+}
+document.getElementById("applink1").onclick = applinkSuccess;
+
+
+function applinkFail(){
+   setTimeout(function () {
+    redirect('itms://itunes.apple.com/us/app/facebook/id284882215?mt=8&uo=6');
+   }, 100);
+   redirect("unknown://nowhere");
+}
+document.getElementById("applink2").onclick = applinkFail;
+
+
+
+
+
+</script>
+</body>
+</html>

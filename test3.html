@@ -1,0 +1,77 @@
+<html>
+<body>
+  <div id='fallback-msg' class='hidden'>
+    <p>If you are not redirected shortly, you may not have the app installed.</p>
+    <p><a id='market-link' href="#">Install the app.</a></p>
+  </div>
+  
+  <a href="intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;end" id="applink1"> Take a QR code </a>
+
+<script type='text/javascript'>
+
+
+// // function redirect(src){
+// //    document.location = src;
+// // }
+
+function openLink(){
+  setTimeout(function () {
+    redirect('itms://itunes.apple.com/us/app/facebook/id284882215?mt=8&uo=6');
+    alert("fallback  2");
+  }, 100);
+  redirect("intent://scan/#Intent;scheme=zxing;package=com.google.zxing.client.android;end");
+}
+ 
+document.getElementById("applink1").onclick = openLink;
+
+
+
+// var code = 'scan';
+// if (/Android/i.test(navigator.userAgent)) {
+//     var custom = "your-scheme://" + code;
+//     var g_intent = "intent://" + code + "/#Intent;scheme=zxing;package=com.google.zxing.client.android;end";
+    
+
+//     var market_link = 'https://play.google.com/store/apps/details?id=com.your.app&referrer=code%3D' + code;
+//     var timer;
+//     var iframe_timer;
+//     function tryIframeApproach() {
+//         var iframe = document.createElement("iframe");
+//         iframe.style.border = "none";
+//         iframe.style.width = "1px";
+//         iframe.style.height = "1px";
+//         iframe.onload = function () {
+//             document.getElementById('market-link').href = market_link;
+//             document.getElementById('fallback-msg').className = 'visible';
+//         };
+//         //iframe.src = custom;
+//         iframe.src = g_intent;
+//         document.body.appendChild(iframe);
+//     }
+//     function tryWebkitApproach() {
+//         //document.location = custom;
+//     }
+//     function useIntent() {
+//         document.location = g_intent;
+//     }
+//     function launch() {
+//         if (navigator.userAgent.match(/Chrome/)) {
+//             useIntent();
+//         } else if (navigator.userAgent.match(/Firefox/)) {
+//             tryWebkitApproach();
+//             iframe_timer = setTimeout(function () {
+//                 tryIframeApproach();
+//             }, 1500);
+//         } else {
+//             tryIframeApproach();
+//         }
+//         timer = setTimeout(function () {
+//             document.getElementById('market-link').href = market_link;
+//             document.getElementById('fallback-msg').className = 'visible';
+//         }, 2500);
+//     }
+//     window.onload = function(){launch();};
+// }
+</script>
+</body>
+</html>

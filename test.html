@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+
+    <h2><a id="applink1" href="#">open facebook with fallback to appstore</a></h2>
+    <h2><a id="applink2" href="#">open unknown with fallback to appstore</a></h2>
+    <p><i>Only works on iPhone!</i></p>    
+
+  <script type="text/javascript">
+
+
+function applinkSuccess() {
+    window.location = "fb://profile/caa1211";
+  setTimeout(function() {
+    //Fallback
+    window.location = 'http://www.google.com';
+  }, 100);
+
+}
+
+function applinkFail() {
+  setTimeout(function() {
+    //Fallback
+    window.location = 'itms://itunes.apple.com/us/app/facebook/id284882215?mt=8&uo=6';
+  }, 100);
+  window.location = "unknown://nowhere";
+}
+
+
+document.getElementById("applink1").onclick = applinkSuccess;
+document.getElementById("applink2").onclick = applinkFail;
+
+</script>
+</body>
+</html>

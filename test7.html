@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+
+
+    <p><i>Page</i></p>    
+
+
+  <script type="text/javascript">
+  var redirect = function (location) {
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('src', location);
+    iframe.setAttribute('width', '1px');
+    iframe.setAttribute('height', '1px');
+    iframe.setAttribute('position', 'absolute');
+    iframe.setAttribute('top', '0');
+    iframe.setAttribute('left', '0');
+    document.documentElement.appendChild(iframe);
+    iframe.parentNode.removeChild(iframe);
+    iframe = null;
+};
+
+
+    redirect("unknow://profile/caa1211");
+  </script>
+  
+</body>
+</html>
