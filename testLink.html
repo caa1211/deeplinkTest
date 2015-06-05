@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+    <button class="source_url">Open App or fall back to Webpage</button>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<script type="text/javascript">
+/* Reference: 
+ http://stackoverflow.com/questions/7231085/how-to-fall-back-to-marketplace-when-android-custom-url-scheme-not-handled
+ http://aawaara.com/post/88310470252/smallest-piece-of-code-thats-going-to-change-the
+ https://paul.kinlan.me/deep-app-linking-on-android-and-chrome/
+*/
+    var custom = "tumblr://x-callback-url/dashboard";
+    var alt = "http://www.yahoo.com";
+    var g_intent = "intent://scan/#Intent;scheme=zxing;package=com.tumblr;S.browser_fallback_url="+encodeURIComponent(alt)+";end";
+    var timer;
+    var heartbeat;
+    var iframe_timer;
+ 
+    function clearTimers() {
+        clearTimeout(timer);
+        clearTimeout(heartbeat);
+        clearTimeout(iframe_timer);
+    }
+ 
+    function intervalHeartbeat() {
+        if (document.webkitHidden || document.hidden) {
+            clearTimers();
+        }
+    }
+ 
+    function tryIframeApproach() {
+        var iframe = document.createElement("iframe");
+        iframe.style.border = "none";
+        iframe.style.width = "1px";
+        iframe.style.height = "1px";
+        iframe.onload = function () {
+            document.location = alt;
+        };
+        iframe.src = custom;
+        document.body.appendChild(iframe);
+    }
+ 
+    function tryWebkitApproach() {
+        document.location = custom;
+        timer = setTimeout(function () {
+            document.location = alt;
+        }, 2500);
+    }
+ 
+    function useIntent() {
+        document.location = g_intent;
+    }
+ 
+    function launch_app_or_alt_url(el) {
+        heartbeat = setInterval(intervalHeartbeat, 200);
+        if (navigator.userAgent.match(/Chrome/)) {
+            useIntent();
+        } else if (navigator.userAgent.match(/Firefox/)) {
+            tryWebkitApproach();
+            iframe_timer = setTimeout(function () {
+                tryIframeApproach();
+            }, 1500);
+        } else {
+            tryIframeApproach();
+        }
+    }
+ 
+    $(".source_url").click(function (event) {
+      debugger;
+        launch_app_or_alt_url($(this));
+        event.preventDefault();
+    });
+</script>
+  
+</body>
+</html>
