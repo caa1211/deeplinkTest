@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width" />
   </head>
   <body>
-    <button class="source_url">Open App or fall back to Webpage</button>
+  <button class="source_url">Open Tumblr app or fall back to Webpage</button>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
@@ -15,7 +15,7 @@
 */
     var custom = "tumblr://x-callback-url/dashboard";
     var alt = "http://www.yahoo.com";
-    var g_intent = "intent://scan/#Intent;scheme=zxing;package=com.tumblr;S.browser_fallback_url="+encodeURIComponent(alt)+";end";
+    var g_intent = "intent://scan/#Intent;package=com.tumblr;S.browser_fallback_url="+encodeURIComponent(alt)+";end";
     var timer;
     var heartbeat;
     var iframe_timer;
@@ -70,10 +70,10 @@
     }
  
     $(".source_url").click(function (event) {
-      debugger;
         launch_app_or_alt_url($(this));
         event.preventDefault();
     });
+
 </script>
   
 </body>
